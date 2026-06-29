@@ -649,6 +649,21 @@ export interface Translations {
     failedToUpdate: (name: string) => string
   }
 
+  learning: {
+    title: string
+    subtitle: (nodes: number, clusters: number) => string
+    close: string
+    refresh: string
+    memory: string
+    filterAll: string
+    filterUsed: string
+    filterLearned: string
+    viewGraph: string
+    loadFailed: string
+    loading: string
+    emptyTitle: string
+    emptyDesc: string
+  }
   agents: {
     close: string
     title: string
@@ -1498,6 +1513,8 @@ export interface Translations {
       running: (count: number) => string
       cron: string
       openCron: string
+      learning: string
+      openLearning: string
       turnRunning: string
       currentTurnElapsed: string
       contextUsage: string

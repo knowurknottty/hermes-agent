@@ -752,6 +752,21 @@ export const en: Translations = {
     failedToUpdate: name => `Failed to update ${name}`
   },
 
+  learning: {
+    title: 'Learning',
+    subtitle: (nodes, clusters) => `${nodes} skills across ${clusters} categories`,
+    close: 'Close learning',
+    refresh: 'Refresh',
+    memory: 'Memory',
+    filterAll: 'All',
+    filterUsed: 'Used',
+    filterLearned: 'Learned',
+    viewGraph: 'Graph',
+    loadFailed: 'Could not load learning graph',
+    loading: 'Loading…',
+    emptyTitle: 'Nothing learned yet',
+    emptyDesc: 'As Hermes builds skills and memories for your work, they appear here.'
+  },
   agents: {
     close: 'Close agents',
     title: 'Spawn tree',
@@ -1845,6 +1860,8 @@ export const en: Translations = {
       running: count => `${count} running`,
       cron: 'Cron',
       openCron: 'Open cron jobs',
+      learning: 'Learning',
+      openLearning: 'Open learning graph',
       turnRunning: 'Running',
       currentTurnElapsed: 'Current turn elapsed',
       contextUsage: 'Context usage',

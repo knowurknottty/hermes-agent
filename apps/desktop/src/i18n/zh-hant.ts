@@ -836,6 +836,21 @@ export const zhHant = defineLocale({
     failedToUpdate: name => `更新 ${name} 失敗`
   },
 
+  learning: {
+    title: '學習',
+    subtitle: (nodes, clusters) => `${clusters} 個類別中的 ${nodes} 個技能`,
+    close: '關閉學習',
+    refresh: '重新整理',
+    memory: '記憶',
+    filterAll: '全部',
+    filterUsed: '已使用',
+    filterLearned: '已學習',
+    viewGraph: '圖譜',
+    loadFailed: '無法載入學習圖譜',
+    loading: '載入中…',
+    emptyTitle: '尚無學習內容',
+    emptyDesc: '當 Hermes 為你的工作建立技能與記憶時，會顯示在這裡。'
+  },
   agents: {
     close: '關閉代理',
     title: '派生樹',
@@ -1904,6 +1919,8 @@ export const zhHant = defineLocale({
       running: count => `${count} 個執行中`,
       cron: '排程',
       openCron: '開啟排程工作',
+      learning: '學習',
+      openLearning: '開啟學習圖譜',
       turnRunning: '執行中',
       currentTurnElapsed: '目前回合已用時間',
       contextUsage: '上下文使用量',
