@@ -208,26 +208,27 @@ def maybe_require_edit_approval(tool_name: str, arguments: dict[str, Any]) -> st
         return None
     return json.dumps({"error": "Edit approval denied by ACP client; file was not modified."}, ensure_ascii=False)
 
-
 def build_acp_edit_tool_call(proposal: EditProposal):
-    """Build the ToolCallUpdate payload for ACP request_permission."""
-
-    import acp
-
+    """
+    Build the ToolCallUpdate payload for ACP request_permission.
+    """
+    # Use compatibility stubs for ACP schema types
+    from acp_adapter.acp_compat import ToolCallUpdate, ToolDiffContent
+    
     tool_call_id = f"edit-approval-{next(_PERMISSION_REQUEST_IDS)}"
-    return acp.update_tool_call(
-        tool_call_id,
+    return ToolCallUpdate(
+        tool_call_id=tool_call_id,
         title=f"Approve edit: {proposal.path}",
         kind="edit",
         status="pending",
         content=[
-            acp.tool_diff_content(
+            ToolDiffContent(
                 path=proposal.path,
-                old_text=proposal.old_text,
-                new_text=proposal.new_text,
+                oldText=proposal.old_text,
+                newText=proposal.new_text,
             )
         ],
-        raw_input={"tool": proposal.tool_name, "arguments": proposal.arguments},
+        rawInput={"tool": proposal.tool_name, "arguments": proposal.arguments},
     )
 
 
@@ -241,7 +242,8 @@ def make_acp_edit_approval_requester(
     """Return a sync requester that bridges edit proposals to ACP permissions."""
 
     def _requester(proposal: EditProposal) -> bool:
-        from acp.schema import PermissionOption
+        # Use compatibility stubs for ACP schema types
+        from acp_adapter.acp_compat import PermissionOption
         from agent.async_utils import safe_schedule_threadsafe
 
         if auto_approve_getter is not None:

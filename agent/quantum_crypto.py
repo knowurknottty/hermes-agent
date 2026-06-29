@@ -9,7 +9,6 @@ Based on NIST Post-Quantum Cryptography (PQC) standards.
 
 import hashlib
 import secrets
-import numpy as np
 from typing import Tuple, Optional, Dict, Any
 
 
@@ -87,13 +86,17 @@ class QuantumResistantCrypto:
             Encrypted ciphertext
         """
         # Simplified lattice encryption
-        # Real Kyber: c = (u, v) where u = A^T r + e1, v = t^T r + e2 + encode(m)
+        # For demo: Use public key to derive encryption key
+        # In real Kyber: c = (u, v) where u = A^T r + e1, v = t^T r + e2 + encode(m)
         
-        # Add randomness
-        rng = secrets.token_bytes(16)
+        # Derive encryption key from public key
+        enc_key = hashlib.sha256(public_key).digest()
         
-        # Encrypt: hash(pk || pt || rng)
-        ciphertext = hashlib.sha256(public_key + plaintext + rng).digest()
+        # Pad plaintext to 32 bytes
+        padded = plaintext + b'\x00' * (32 - len(plaintext))
+        
+        # XOR with encryption key (simulates encryption)
+        ciphertext = bytes([p ^ k for p, k in zip(padded, enc_key)])
         
         return ciphertext
     
@@ -106,15 +109,23 @@ class QuantumResistantCrypto:
             ciphertext: Encrypted data
             
         Returns:
-            Decrypted plaintext (simplified - returns fixed length)
+            Decrypted plaintext
         """
-        # Simplified decryption
-        # Real Kyber: m' = decode(v - s^T u)
+        # In proper implementation, secret_key would allow deriving the same hash
+        # For this demo: secret_key and public_key should hash to same value
+        # In reality, proper key derivation would happen here
         
-        plaintext_hash = hashlib.sha256(secret_key + ciphertext).digest()
+        # Derive decryption key from secret key
+        # NOTE: In real implementation, this would use proper lattice math
+        dec_key = hashlib.sha256(secret_key).digest()
         
-        # Return first 32 bytes as "plaintext"
-        return plaintext_hash[:32]
+        # XOR to decrypt (reverse of encrypt)
+        plaintext_padded = bytes([c ^ k for c, k in zip(ciphertext, dec_key)])
+        
+        # Remove padding
+        plaintext = plaintext_padded.rstrip(b'\x00')
+        
+        return plaintext
     
     def encapsulate_key(self, public_key: bytes) -> Tuple[bytes, bytes]:
         """
