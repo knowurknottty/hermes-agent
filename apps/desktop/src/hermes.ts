@@ -17,6 +17,7 @@ import type {
   EnvVarInfo,
   HermesConfig,
   HermesConfigRecord,
+  LearningGraph,
   LogsResponse,
   MemoryProviderConfig,
   MemoryProviderOAuthStatus,
@@ -77,6 +78,7 @@ export type {
   GatewayReadyPayload,
   HermesConfig,
   HermesConfigRecord,
+  LearningGraph,
   LogsResponse,
   MemoryProviderConfig,
   MemoryProviderOAuthStatus,
@@ -486,6 +488,13 @@ export function getSkills(): Promise<SkillInfo[]> {
   return window.hermesDesktop.api<SkillInfo[]>({
     ...profileScoped(),
     path: '/api/skills'
+  })
+}
+
+export function getLearningGraph(): Promise<LearningGraph> {
+  return window.hermesDesktop.api<LearningGraph>({
+    ...profileScoped(),
+    path: '/api/learning/graph'
   })
 }
 
