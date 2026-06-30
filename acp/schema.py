@@ -1,10 +1,8 @@
 """
-ACP Schema Stubs - Compatibility module for ACP adapter.
+ACP Schema Stubs - Import compatibility fix for the ACP adapter.
 
-This module provides stub classes for ACP schema types that the
-acp_adapter expects but are not available in the installed acp_sdk package.
-
-These are simplified stubs for testing purposes.
+This is NOT an ACP protocol implementation. It provides stub classes that
+fix import errors when the installed acp_sdk package lacks schema types.
 """
 
 from typing import Optional, Dict, Any

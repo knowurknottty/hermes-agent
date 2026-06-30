@@ -212,7 +212,7 @@ def build_acp_edit_tool_call(proposal: EditProposal):
     """
     Build the ToolCallUpdate payload for ACP request_permission.
     """
-    # Use compatibility stubs for ACP schema types
+    # Import compatibility fix: use local stubs, not the real acp.schema
     from acp_adapter.acp_compat import ToolCallUpdate, ToolDiffContent
     
     tool_call_id = f"edit-approval-{next(_PERMISSION_REQUEST_IDS)}"
@@ -242,7 +242,7 @@ def make_acp_edit_approval_requester(
     """Return a sync requester that bridges edit proposals to ACP permissions."""
 
     def _requester(proposal: EditProposal) -> bool:
-        # Use compatibility stubs for ACP schema types
+        # Import compatibility fix: use local stubs, not the real acp.schema
         from acp_adapter.acp_compat import PermissionOption
         from agent.async_utils import safe_schedule_threadsafe
 

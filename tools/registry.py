@@ -356,8 +356,13 @@ class ToolRegistry:
                 max_result_size_chars=max_result_size_chars,
                 dynamic_schema_overrides=dynamic_schema_overrides,
             )
-            if check_fn and toolset not in self._toolset_checks:
-                self._toolset_checks[toolset] = check_fn
+            if check_fn:
+                existing = self._toolset_checks.get(toolset)
+                if existing is None or name == toolset:
+                    # Prefer the check_fn from the tool whose name matches the
+                    # toolset (e.g. "terminal" tool for the "terminal" toolset)
+                    # so auxiliary desktop-only tools don't gate the core tool.
+                    self._toolset_checks[toolset] = check_fn
             self._generation += 1
 
     def deregister(self, name: str) -> None:

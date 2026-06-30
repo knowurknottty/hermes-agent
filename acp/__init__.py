@@ -1,8 +1,8 @@
 """
-ACP Protocol - Compatibility stubs.
+ACP Import Compatibility Fix - Stub classes for ACP schema types.
 
-This package provides stub modules for ACP schema types
-that the hermes-agent ACP adapter expects.
+This is NOT an ACP protocol implementation. It provides stub classes that
+fix import errors when the installed acp_sdk package lacks schema types.
 """
 
 from .schema import (

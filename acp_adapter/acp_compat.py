@@ -1,11 +1,9 @@
 """
-ACP Compatibility Module - Stub classes for ACP schema types.
+ACP Import Compatibility Fix - Stub classes for ACP schema types.
 
-This module provides stub classes for ACP schema types that the
-hermes-agent ACP adapter expects but are not available in the
-installed acp_sdk package.
-
-These are simplified stubs for testing and compatibility purposes.
+This is NOT an ACP protocol implementation. It provides stub classes that
+fix import errors when the installed acp_sdk package lacks schema types
+the acp_adapter references. The stubs exist solely so imports don't break.
 """
 
 from typing import Optional, Dict, Any
